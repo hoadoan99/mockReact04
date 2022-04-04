@@ -13,7 +13,10 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { ReposContext } from "../context/context";
 import { Link } from "react-router-dom";
-
+// import AddTaskIcon from "@mui/icons-material/AddTask";
+// import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+// import ReplayIcon from "@mui/icons-material/Replay";
+// import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 const style = {
   position: "absolute",
   top: "50%",
@@ -25,7 +28,6 @@ const style = {
   boxShadow: 24,
   p: 2,
 };
-
 function Column() {
   const { isLoading, repos } = React.useContext(ReposContext);
 
@@ -40,7 +42,7 @@ function Column() {
       {/* Data Table */}
       <Wrapper>
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="customized  table">
+          <Table sx={{ minWidth: 800 }} aria-label="customized  table">
             <TableHead>
               <TableRow>
                 <TableCell>ID</TableCell>
@@ -54,13 +56,15 @@ function Column() {
                   <ButtonA>
                     <Button onClick={handleOpen}>
                       <Link to="/AddNew" style={textWhite}>
-                        ADD +
+                        ADD
                       </Link>
                     </Button>
                   </ButtonA>
                 </TableCell>
                 <TableCell align="right">
-                  <Button>RELOAD</Button>
+                  <ButtonR>
+                    <Button type="button">Load</Button>
+                  </ButtonR>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -111,7 +115,7 @@ function Column() {
   );
 }
 const Wrapper = styled.div`
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
   margin-top: 10px;
 `;
@@ -122,6 +126,7 @@ const ButtonE = styled.button`
   }
   color: white;
   border: none;
+  border-radius: 3px;
 `;
 const ButtonD = styled.button`
   background: rgb(223, 89, 89);
@@ -129,6 +134,7 @@ const ButtonD = styled.button`
     color: white;
   }
   border: none;
+  border-radius: 3px;
 `;
 const ButtonA = styled.button`
   background: #21a215;
@@ -136,6 +142,15 @@ const ButtonA = styled.button`
     color: white;
   }
   border: none;
+  border-radius: 3px;
+`;
+const ButtonR = styled.button`
+  background: gray;
+  button {
+    color: white;
+  }
+  border: none;
+  border-radius: 3px;
 `;
 const textWhite = {
   color: "white",

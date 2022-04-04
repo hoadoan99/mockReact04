@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -8,7 +8,15 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import { useForm } from "react-hook-form";
+// import AddTaskIcon from "@mui/icons-material/AddTask";
+// import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+// import ReplayIcon from "@mui/icons-material/Replay";
+// import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   backgroundColor: "transparent",
@@ -19,167 +27,210 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function Add() {
+  const [age, setAge] = React.useState("");
+  const [id, setId] = useState("");
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+
+  // submit
+  const [item, setItem] = useState({
+    id: "",
+    name: "",
+    description: "",
+    watcher: 0,
+    language: "",
+    issues: 0,
+    private: false,
+  });
+
+  const onIdChange = (e) => setId(e.target.value);
+  const collectData = () => {};
+  const handleSubmit = () => console.log(id);
   return (
-    <Box sx={{ flexGrow: 1, margin: "25px 0" }}>
-      <Grid container>
-        <Grid item>
-          <Typography noWrap>
-            {" "}
-            <h2>Add New User's Repos</h2>{" "}
-          </Typography>
+    <Paper sx={{ padding: "30px 0" }}>
+      <Box sx={{ flexGrow: 1, margin: "25px 0" }}>
+        <Grid container>
+          <Grid item xs={12}>
+            <Item>
+              <Typography sx={{ width: "90%", margin: "0 auto" }} noWrap>
+                {" "}
+                <h2>Add New User's Repos</h2>{" "}
+              </Typography>
+            </Item>
+          </Grid>
         </Grid>
-      </Grid>
-      {/* group  */}
-      <Grid sx={{ width: "90%", margin: "0 auto" }} container spacing={1}>
-        <Grid item xs={6}>
-          <Item>
-            <Box
-              component="form"
-              sx={{
-                "& > :not(style)": { m: 1, width: "100%" },
-              }}
-              noValidate
-              autoComplete="off">
-              <TextField
-                id="outlined-basic"
-                label="Outlined"
-                variant="outlined"
-              />
-            </Box>
-          </Item>
+        {/* group  */}
+        <Grid sx={{ width: "90%", margin: "0 auto" }} container spacing={1}>
+          <Grid item xs={6}>
+            {/* ID  */}
+            <Item>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "100%" },
+                }}
+                noValidate
+                autoComplete="off">
+                <TextField
+                  id="outlined-basic"
+                  label="ID"
+                  variant="outlined"
+                  value={id}
+                  onChange={onIdChange}
+                />
+              </Box>
+            </Item>
+          </Grid>
+          <Grid item xs={6} spacing={1}>
+            {/* Name  */}
+            <Item>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "100%" },
+                }}
+                noValidate
+                autoComplete="off">
+                <TextField
+                  id="outlined-basic"
+                  label="Name"
+                  variant="outlined"
+                />
+              </Box>
+            </Item>
+          </Grid>
         </Grid>
-        <Grid item xs={6} spacing={1}>
-          <Item>
-            <Box
-              component="form"
-              sx={{
-                "& > :not(style)": { m: 1, width: "100%" },
-              }}
-              noValidate
-              autoComplete="off">
-              <TextField
-                id="outlined-basic"
-                label="Outlined"
-                variant="outlined"
-              />
-            </Box>
-          </Item>
+        {/* end-group  */}
+        {/* group  */}
+        <Grid sx={{ width: "90%", margin: "0 auto" }} container spacing={1}>
+          <Grid item xs={12}>
+            {/* Desciption  */}
+            <Item>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "100%" },
+                }}
+                noValidate
+                autoComplete="off">
+                <TextField
+                  id="outlined-textarea"
+                  label="Desciption"
+                  placeholder="Enter Desciption"
+                  multiline
+                />
+              </Box>
+            </Item>
+          </Grid>
         </Grid>
-      </Grid>
-      {/* end-group  */}
-      {/* group  */}
-      <Grid sx={{ width: "90%", margin: "0 auto" }} container spacing={1}>
-        <Grid item xs={6}>
-          <Item>
-            <Box
-              component="form"
-              sx={{
-                "& > :not(style)": { m: 1, width: "100%" },
-              }}
-              noValidate
-              autoComplete="off">
-              <TextField
-                id="outlined-basic"
-                label="Outlined"
-                variant="outlined"
-              />
-            </Box>
-          </Item>
+        {/* end-group  */}
+        {/* group  */}
+        <Grid sx={{ width: "90%", margin: "0 auto" }} container spacing={1}>
+          <Grid item xs={6}>
+            {/* Watchers Count  */}
+            <Item>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "100%" },
+                }}
+                noValidate
+                autoComplete="off">
+                <TextField
+                  id="outlined-basic"
+                  label="Watchers Count"
+                  variant="outlined"
+                />
+              </Box>
+            </Item>
+          </Grid>
+          <Grid item xs={6} spacing={1}>
+            {/* Language  */}
+            <Item>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "100%" },
+                }}
+                noValidate
+                autoComplete="off">
+                <TextField
+                  id="outlined-basic"
+                  label="Language"
+                  variant="outlined"
+                />
+              </Box>
+            </Item>
+          </Grid>
         </Grid>
-        <Grid item xs={6} spacing={1}>
-          <Item>
-            <Box
-              component="form"
-              sx={{
-                "& > :not(style)": { m: 1, width: "100%" },
-              }}
-              noValidate
-              autoComplete="off">
-              <TextField
-                id="outlined-basic"
-                label="Outlined"
-                variant="outlined"
-              />
-            </Box>
-          </Item>
+        {/* end-group  */}
+        {/* group  */}
+        <Grid sx={{ width: "90%", margin: "0 auto" }} container spacing={1}>
+          <Grid item xs={6}>
+            {/* Open Issues  */}
+            <Item>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "100%" },
+                }}
+                noValidate
+                autoComplete="off">
+                <TextField
+                  id="outlined-basic"
+                  label="Open Issues"
+                  variant="outlined"
+                />
+              </Box>
+            </Item>
+          </Grid>
+          <Grid item xs={6} spacing={1}>
+            {/* Private  */}
+            <Item>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "100%" },
+                }}
+                noValidate
+                autoComplete="off">
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Private</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={age}
+                    label="Age"
+                    onChange={handleChange}>
+                    <MenuItem value={10}>True</MenuItem>
+                    <MenuItem value={20}>False</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+            </Item>
+          </Grid>
         </Grid>
-      </Grid>
-      {/* end-group  */}
-      {/* group  */}
-      <Grid sx={{ width: "90%", margin: "0 auto" }} container spacing={1}>
-        <Grid item xs={6}>
-          <Item>
-            <Box
-              component="form"
-              sx={{
-                "& > :not(style)": { m: 1, width: "100%" },
-              }}
-              noValidate
-              autoComplete="off">
-              <TextField
-                id="outlined-basic"
-                label="Outlined"
-                variant="outlined"
-              />
-            </Box>
-          </Item>
+        {/* end-group  */}
+
+        <Grid sx={{ width: "50%", margin: "0 auto" }} container spacing={1}>
+          <Grid item xs={4}></Grid>
+          <Grid item xs={2}>
+            <Item style={noPadding}>
+              <Button style={btn} onClick={handleSubmit}>
+                Submit
+              </Button>
+            </Item>
+          </Grid>
+          <Grid item xs={2}>
+            <Item style={noPadding}>
+              <Button style={btn}>Cancel</Button>
+            </Item>
+          </Grid>
         </Grid>
-        <Grid item xs={6} spacing={1}>
-          <Item>
-            <Box
-              component="form"
-              sx={{
-                "& > :not(style)": { m: 1, width: "100%" },
-              }}
-              noValidate
-              autoComplete="off">
-              <TextField
-                id="outlined-basic"
-                label="Outlined"
-                variant="outlined"
-              />
-            </Box>
-          </Item>
-        </Grid>
-      </Grid>
-      {/* end-group  */}
-      <Grid sx={{ width: "100%" }}>
-        <Grid item xs={12}>
-          <Item
-            sx={{
-              "& > :not(style)": { width: "100%" },
-            }}>
-            <Box
-              component="form"
-              sx={{
-                "& > :not(style)": { m: 1, width: "90%" },
-              }}
-              noValidate
-              autoComplete="off">
-              <TextField
-                id="outlined-textarea"
-                label="Multiline Placeholder"
-                placeholder="Placeholder"
-                multiline
-              />
-            </Box>
-          </Item>
-        </Grid>
-      </Grid>
-      <Grid sx={{ width: "50%", margin: "0 auto" }} container spacing={1}>
-        <Grid item xs={4}></Grid>
-        <Grid item xs={2}>
-          <Item style={noPadding}>
-            <Button style={btn}>Edit</Button>
-          </Item>
-        </Grid>
-        <Grid item xs={2}>
-          <Item style={noPadding}>
-            <Button style={btn}>Delete</Button>
-          </Item>
-        </Grid>
-      </Grid>
-    </Box>
+      </Box>
+    </Paper>
   );
 }
 const btn = {

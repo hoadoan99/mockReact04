@@ -17,15 +17,15 @@ function App() {
       <Navbar />
       <Router>
         <Switch>
-          <PrivateRoutes path="/" exact={true}>
+          <Route path="/" exact={true}>
             <Dashboard></Dashboard>
-          </PrivateRoutes>
+          </Route>
           <Route path="/login">
             <Login></Login>
           </Route>
-          <Route>
+          <PrivateRoutes>
             <AddNew></AddNew>
-          </Route>
+          </PrivateRoutes>
           <Route path="*">
             <Error></Error>
           </Route>

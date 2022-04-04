@@ -72,13 +72,6 @@ function Navbar() {
             Defunkt user's repositories
           </Typography>
           {/* logo  */}
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            LOGO
-          </Typography>
           {/* Search  */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "flex" } }}>
             <Search>

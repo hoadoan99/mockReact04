@@ -19,7 +19,7 @@ const Login = () => {
   );
 };
 const Wrapper = styled.section`
-  min-height: 100vh;
+  min-height: 90.5vh;
   display: grid;
   place-items: center;
   background-color: black;
