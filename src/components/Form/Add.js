@@ -27,11 +27,11 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function Add() {
-  const [age, setAge] = React.useState("");
+  const [prv, setPrivate] = React.useState("");
   const [id, setId] = useState("");
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setPrivate(event.target.value);
   };
 
   // submit
@@ -49,20 +49,21 @@ function Add() {
   const collectData = () => {};
   const handleSubmit = () => console.log(id);
   return (
-    <Paper sx={{ padding: "30px 0" }}>
-      <Box sx={{ flexGrow: 1, margin: "25px 0" }}>
+    <Paper sx={{ padding: "20px 0", marginTop: "34px" }}>
+      <Box sx={{ flexGrow: 1, margin: "23px 0" }}>
         <Grid container>
           <Grid item xs={12}>
             <Item>
-              <Typography sx={{ width: "90%", margin: "0 auto" }} noWrap>
-                {" "}
-                <h2>Add New User's Repos</h2>{" "}
+              <Typography
+                sx={{ width: "90%", margin: "0 auto", fontSize: "25px" }}
+                noWrap>
+                Add New User's Repos
               </Typography>
             </Item>
           </Grid>
         </Grid>
         {/* group  */}
-        <Grid sx={{ width: "90%", margin: "0 auto" }} container spacing={1}>
+        <Grid sx={{ width: "90%", margin: "0 auto" }} container>
           <Grid item xs={6}>
             {/* ID  */}
             <Item>
@@ -74,7 +75,7 @@ function Add() {
                 noValidate
                 autoComplete="off">
                 <TextField
-                  id="outlined-basic"
+                  id="id"
                   label="ID"
                   variant="outlined"
                   value={id}
@@ -83,7 +84,7 @@ function Add() {
               </Box>
             </Item>
           </Grid>
-          <Grid item xs={6} spacing={1}>
+          <Grid item xs={6}>
             {/* Name  */}
             <Item>
               <Box
@@ -93,18 +94,14 @@ function Add() {
                 }}
                 noValidate
                 autoComplete="off">
-                <TextField
-                  id="outlined-basic"
-                  label="Name"
-                  variant="outlined"
-                />
+                <TextField id="name" label="Name" variant="outlined" />
               </Box>
             </Item>
           </Grid>
         </Grid>
         {/* end-group  */}
         {/* group  */}
-        <Grid sx={{ width: "90%", margin: "0 auto" }} container spacing={1}>
+        <Grid sx={{ width: "90%", margin: "0 auto" }} container>
           <Grid item xs={12}>
             {/* Desciption  */}
             <Item>
@@ -116,7 +113,7 @@ function Add() {
                 noValidate
                 autoComplete="off">
                 <TextField
-                  id="outlined-textarea"
+                  id="description"
                   label="Desciption"
                   placeholder="Enter Desciption"
                   multiline
@@ -127,7 +124,7 @@ function Add() {
         </Grid>
         {/* end-group  */}
         {/* group  */}
-        <Grid sx={{ width: "90%", margin: "0 auto" }} container spacing={1}>
+        <Grid sx={{ width: "90%", margin: "0 auto" }} container>
           <Grid item xs={6}>
             {/* Watchers Count  */}
             <Item>
@@ -139,14 +136,14 @@ function Add() {
                 noValidate
                 autoComplete="off">
                 <TextField
-                  id="outlined-basic"
+                  id="watcher"
                   label="Watchers Count"
                   variant="outlined"
                 />
               </Box>
             </Item>
           </Grid>
-          <Grid item xs={6} spacing={1}>
+          <Grid item xs={6}>
             {/* Language  */}
             <Item>
               <Box
@@ -156,18 +153,14 @@ function Add() {
                 }}
                 noValidate
                 autoComplete="off">
-                <TextField
-                  id="outlined-basic"
-                  label="Language"
-                  variant="outlined"
-                />
+                <TextField id="language" label="Language" variant="outlined" />
               </Box>
             </Item>
           </Grid>
         </Grid>
         {/* end-group  */}
         {/* group  */}
-        <Grid sx={{ width: "90%", margin: "0 auto" }} container spacing={1}>
+        <Grid sx={{ width: "90%", margin: "0 auto" }} container>
           <Grid item xs={6}>
             {/* Open Issues  */}
             <Item>
@@ -178,15 +171,11 @@ function Add() {
                 }}
                 noValidate
                 autoComplete="off">
-                <TextField
-                  id="outlined-basic"
-                  label="Open Issues"
-                  variant="outlined"
-                />
+                <TextField id="issues" label="Open Issues" variant="outlined" />
               </Box>
             </Item>
           </Grid>
-          <Grid item xs={6} spacing={1}>
+          <Grid item xs={6}>
             {/* Private  */}
             <Item>
               <Box
@@ -200,12 +189,12 @@ function Add() {
                   <InputLabel id="demo-simple-select-label">Private</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={age}
-                    label="Age"
+                    id="private"
+                    value={prv}
+                    label="private"
                     onChange={handleChange}>
-                    <MenuItem value={10}>True</MenuItem>
-                    <MenuItem value={20}>False</MenuItem>
+                    <MenuItem value={"true"}>True</MenuItem>
+                    <MenuItem value={"fakse"}>False</MenuItem>
                   </Select>
                 </FormControl>
               </Box>
