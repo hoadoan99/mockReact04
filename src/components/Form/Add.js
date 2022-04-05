@@ -64,6 +64,7 @@ function Add() {
   // handleSubmit
   const dispatch = useDispatch();
   const navigate = useHistory();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch({ type: "ADD_DATA", payload: repos });
@@ -101,6 +102,8 @@ function Add() {
                   name="id"
                   value={repos.id}
                   onChange={handleChange}
+                  error={repos.id === ""}
+                  helperText={repos.id === "" ? "ID Not Empty!" : " "}
                 />
               </Box>
             </Item>
@@ -122,6 +125,8 @@ function Add() {
                   variant="outlined"
                   value={repos.userRepos}
                   onChange={handleChange}
+                  error={repos.name === ""}
+                  helperText={repos.name === "" ? "Name Not Empty!" : " "}
                 />
               </Box>
             </Item>
@@ -148,6 +153,10 @@ function Add() {
                   name="description"
                   value={repos.description}
                   onChange={handleChange}
+                  error={repos.description === ""}
+                  helperText={
+                    repos.description === "" ? "Desciption Not Empty!" : " "
+                  }
                 />
               </Box>
             </Item>
@@ -174,6 +183,10 @@ function Add() {
                   type="number"
                   value={repos.watcher}
                   onChange={handleChange}
+                  error={repos.watcher === ""}
+                  helperText={
+                    repos.watcher === "" ? "Watcher Count Not Empty!" : " "
+                  }
                 />
               </Box>
             </Item>
@@ -195,6 +208,10 @@ function Add() {
                   variant="outlined"
                   value={repos.language}
                   onChange={handleChange}
+                  error={repos.language === ""}
+                  helperText={
+                    repos.language === "" ? "Language Count Not Empty!" : " "
+                  }
                 />
               </Box>
             </Item>
@@ -221,6 +238,12 @@ function Add() {
                   name="openIssue"
                   value={repos.openIssue}
                   onChange={handleChange}
+                  error={repos.openIssue === ""}
+                  helperText={
+                    repos.openIssue === ""
+                      ? "Open Issues Count Not Empty!"
+                      : " "
+                  }
                 />
               </Box>
             </Item>
@@ -243,7 +266,11 @@ function Add() {
                     value={repos.prv}
                     label="private"
                     name="prv"
-                    onChange={handleChange}>
+                    onChange={handleChange}
+                    error={repos.prv === ""}
+                    helperText={
+                      repos.prv === "" ? "Private Count Not Empty!" : " "
+                    }>
                     <MenuItem value={true}>True</MenuItem>
                     <MenuItem value={false}>False</MenuItem>
                   </Select>
@@ -258,7 +285,20 @@ function Add() {
           <Grid item xs={4}></Grid>
           <Grid item xs={2}>
             <Item style={noPadding}>
-              <Button style={btn} onClick={handleSubmit}>
+              <Button
+                style={btn}
+                onClick={handleSubmit}
+                disabled={
+                  repos.id === "" ||
+                  repos.name === "" ||
+                  repos.description === "" ||
+                  repos.watcher === "" ||
+                  repos.language === "" ||
+                  repos.openIssue === "" ||
+                  repos.private === ""
+                    ? true
+                    : false
+                }>
                 Submit
               </Button>
             </Item>
