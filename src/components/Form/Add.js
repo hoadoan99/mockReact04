@@ -27,27 +27,40 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function Add() {
-  const [prv, setPrivate] = React.useState("");
-  const [id, setId] = useState("");
-
-  const handleChange = (event) => {
-    setPrivate(event.target.value);
-  };
-
-  // submit
-  const [item, setItem] = useState({
+  // validate
+  const {
+    register,
+    formState: { error },
+  } = useForm();
+  // fields
+  // const [id, setId] = useState("");
+  // const [name, setName] = useState("");
+  // const [description, setDescription] = useState("");
+  // const [watcher, setWatcher] = useState("");
+  // const [language, setLanguage] = useState("");
+  // const [openIssue, setOpenIssue] = useState("");
+  // const [prv, setPrivate] = useState("");
+  const [repos, setRepos] = useState({
     id: "",
-    name: "",
+    userRepos: "",
     description: "",
     watcher: 0,
     language: "",
-    issues: 0,
-    private: false,
+    openIssue: 0,
+    prv: "",
   });
-
-  const onIdChange = (e) => setId(e.target.value);
-  const collectData = () => {};
-  const handleSubmit = () => console.log(id);
+  const [stock, setStock] = useState([]);
+  // handleChange
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setRepos({ ...repos, [name]: value });
+  };
+  console.log(repos);
+  // handleSubmit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <Paper sx={{ padding: "20px 0", marginTop: "34px" }}>
       <Box sx={{ flexGrow: 1, margin: "23px 0" }}>
@@ -75,11 +88,10 @@ function Add() {
                 noValidate
                 autoComplete="off">
                 <TextField
-                  id="id"
                   label="ID"
                   variant="outlined"
-                  value={id}
-                  onChange={onIdChange}
+                  value={repos.id}
+                  onChange={handleChange}
                 />
               </Box>
             </Item>
@@ -93,8 +105,14 @@ function Add() {
                   "& > :not(style)": { m: 1, width: "100%" },
                 }}
                 noValidate
-                autoComplete="off">
-                <TextField id="name" label="Name" variant="outlined" />
+                autoComplete="on">
+                <TextField
+                  id="name"
+                  label="Name"
+                  variant="outlined"
+                  value={repos.userRepos}
+                  onChange={handleChange}
+                />
               </Box>
             </Item>
           </Grid>
@@ -117,6 +135,8 @@ function Add() {
                   label="Desciption"
                   placeholder="Enter Desciption"
                   multiline
+                  value={repos.description}
+                  onChange={handleChange}
                 />
               </Box>
             </Item>
@@ -139,6 +159,9 @@ function Add() {
                   id="watcher"
                   label="Watchers Count"
                   variant="outlined"
+                  type="number"
+                  value={repos.watcher}
+                  onChange={handleChange}
                 />
               </Box>
             </Item>
@@ -153,7 +176,13 @@ function Add() {
                 }}
                 noValidate
                 autoComplete="off">
-                <TextField id="language" label="Language" variant="outlined" />
+                <TextField
+                  id="language"
+                  label="Language"
+                  variant="outlined"
+                  value={repos.language}
+                  onChange={handleChange}
+                />
               </Box>
             </Item>
           </Grid>
@@ -171,7 +200,14 @@ function Add() {
                 }}
                 noValidate
                 autoComplete="off">
-                <TextField id="issues" label="Open Issues" variant="outlined" />
+                <TextField
+                  id="issues"
+                  label="Open Issues"
+                  variant="outlined"
+                  type="number"
+                  value={repos.openIssue}
+                  onChange={handleChange}
+                />
               </Box>
             </Item>
           </Grid>
@@ -190,11 +226,11 @@ function Add() {
                   <Select
                     labelId="demo-simple-select-label"
                     id="private"
-                    value={prv}
+                    value={repos.private}
                     label="private"
                     onChange={handleChange}>
                     <MenuItem value={"true"}>True</MenuItem>
-                    <MenuItem value={"fakse"}>False</MenuItem>
+                    <MenuItem value={"false"}>False</MenuItem>
                   </Select>
                 </FormControl>
               </Box>
