@@ -3,12 +3,20 @@
 const url = "https://api.github.com/users/defunkt/repos";
 
 const initialState = {
-  items: [],
+  reposs: [],
 };
 export default function contactReducer(state = initialState, action) {
   switch (action.type) {
     case "FETCH_DATA":
-      return { ...state, items: action.payload };
+      return { ...state, reposs: action.payload };
+      console.log(...state);
+    case "ADD_DATA":
+      return { ...state, reposs: [...state.reposs, action.payload] };
+    case "DEL_DATA":
+      const newRepos = state.reposs.filter((item) => {
+        return item.id !== action.payload;
+      });
+      return { ...state, reposs: newRepos };
     default:
       return state;
   }

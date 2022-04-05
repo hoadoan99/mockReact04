@@ -6,14 +6,14 @@ import { Navbar } from "../components";
 import { ReposContext } from "../context/context";
 import loadingImg from "../images/preloader.gif";
 function Dashboard() {
-  const { isLoading } = React.useContext(ReposContext);
-  if (isLoading) {
-    return (
-      <main>
-        <img src={loadingImg} className="loading-img" alt="loading" />
-      </main>
-    );
-  }
+  // const { isLoading } = React.useContext(ReposContext);
+  // if (isLoading) {
+  //   return (
+  //     <main>
+  //       <img src={loadingImg} className="loading-img" alt="loading" />
+  //     </main>
+  //   );
+  // }
   return (
     <main>
       <Column />;

@@ -13,6 +13,7 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { ReposContext } from "../context/context";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 // import AddTaskIcon from "@mui/icons-material/AddTask";
 // import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 // import ReplayIcon from "@mui/icons-material/Replay";
@@ -29,13 +30,18 @@ const style = {
   p: 2,
 };
 function Column() {
-  const { isLoading, repos } = React.useContext(ReposContext);
+  const data = useSelector((state) => state.data.reposs);
+
+  // const { isLoading, repos } = React.useContext(ReposContext);
 
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen(true);
-
-  console.log(repos);
+  const dispatch = useDispatch();
+  const handleDelete = (id) => {
+    dispatch({ type: "DEL_DATA", payload: id });
+  };
+  // console.log(repos);
 
   return (
     <>
@@ -69,7 +75,7 @@ function Column() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {repos.map((row) => {
+              {data.map((row) => {
                 const {
                   id,
                   name,
@@ -101,7 +107,9 @@ function Column() {
                     </TableCell>
                     <TableCell>
                       <ButtonD>
-                        <Button type="button">Delete</Button>
+                        <Button type="button" onClick={() => handleDelete(id)}>
+                          Delete
+                        </Button>
                       </ButtonD>
                     </TableCell>
                   </TableRow>

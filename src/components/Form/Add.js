@@ -13,6 +13,9 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+
 // import AddTaskIcon from "@mui/icons-material/AddTask";
 // import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 // import ReplayIcon from "@mui/icons-material/Replay";
@@ -42,7 +45,7 @@ function Add() {
   // const [prv, setPrivate] = useState("");
   const [repos, setRepos] = useState({
     id: "",
-    userRepos: "",
+    name: "",
     description: "",
     watcher: 0,
     language: "",
@@ -54,12 +57,17 @@ function Add() {
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
+    console.log(name, value);
     setRepos({ ...repos, [name]: value });
   };
   console.log(repos);
   // handleSubmit
+  const dispatch = useDispatch();
+  const navigate = useHistory();
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch({ type: "ADD_DATA", payload: repos });
+    navigate.push("/");
   };
   return (
     <Paper sx={{ padding: "20px 0", marginTop: "34px" }}>
@@ -90,6 +98,7 @@ function Add() {
                 <TextField
                   label="ID"
                   variant="outlined"
+                  name="id"
                   value={repos.id}
                   onChange={handleChange}
                 />
@@ -108,6 +117,7 @@ function Add() {
                 autoComplete="on">
                 <TextField
                   id="name"
+                  name="name"
                   label="Name"
                   variant="outlined"
                   value={repos.userRepos}
@@ -135,6 +145,7 @@ function Add() {
                   label="Desciption"
                   placeholder="Enter Desciption"
                   multiline
+                  name="description"
                   value={repos.description}
                   onChange={handleChange}
                 />
@@ -157,6 +168,7 @@ function Add() {
                 autoComplete="off">
                 <TextField
                   id="watcher"
+                  name="watcher"
                   label="Watchers Count"
                   variant="outlined"
                   type="number"
@@ -178,6 +190,7 @@ function Add() {
                 autoComplete="off">
                 <TextField
                   id="language"
+                  name="language"
                   label="Language"
                   variant="outlined"
                   value={repos.language}
@@ -205,6 +218,7 @@ function Add() {
                   label="Open Issues"
                   variant="outlined"
                   type="number"
+                  name="openIssue"
                   value={repos.openIssue}
                   onChange={handleChange}
                 />
@@ -226,11 +240,12 @@ function Add() {
                   <Select
                     labelId="demo-simple-select-label"
                     id="private"
-                    value={repos.private}
+                    value={repos.prv}
                     label="private"
+                    name="prv"
                     onChange={handleChange}>
-                    <MenuItem value={"true"}>True</MenuItem>
-                    <MenuItem value={"false"}>False</MenuItem>
+                    <MenuItem value={true}>True</MenuItem>
+                    <MenuItem value={false}>False</MenuItem>
                   </Select>
                 </FormControl>
               </Box>
