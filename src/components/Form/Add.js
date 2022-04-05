@@ -27,42 +27,56 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function Add() {
-  const [age, setAge] = React.useState("");
-  const [id, setId] = useState("");
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
-  // submit
-  const [item, setItem] = useState({
+  // validate
+  const {
+    register,
+    formState: { error },
+  } = useForm();
+  // fields
+  // const [id, setId] = useState("");
+  // const [name, setName] = useState("");
+  // const [description, setDescription] = useState("");
+  // const [watcher, setWatcher] = useState("");
+  // const [language, setLanguage] = useState("");
+  // const [openIssue, setOpenIssue] = useState("");
+  // const [prv, setPrivate] = useState("");
+  const [repos, setRepos] = useState({
     id: "",
-    name: "",
+    userRepos: "",
     description: "",
     watcher: 0,
     language: "",
-    issues: 0,
-    private: false,
+    openIssue: 0,
+    prv: "",
   });
-
-  const onIdChange = (e) => setId(e.target.value);
-  const collectData = () => {};
-  const handleSubmit = () => console.log(id);
+  const [stock, setStock] = useState([]);
+  // handleChange
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setRepos({ ...repos, [name]: value });
+  };
+  console.log(repos);
+  // handleSubmit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
-    <Paper sx={{ padding: "30px 0" }}>
-      <Box sx={{ flexGrow: 1, margin: "25px 0" }}>
+    <Paper sx={{ padding: "20px 0", marginTop: "34px" }}>
+      <Box sx={{ flexGrow: 1, margin: "23px 0" }}>
         <Grid container>
           <Grid item xs={12}>
             <Item>
-              <Typography sx={{ width: "90%", margin: "0 auto" }} noWrap>
-                {" "}
-                <h2>Add New User's Repos</h2>{" "}
+              <Typography
+                sx={{ width: "90%", margin: "0 auto", fontSize: "25px" }}
+                noWrap>
+                Add New User's Repos
               </Typography>
             </Item>
           </Grid>
         </Grid>
         {/* group  */}
-        <Grid sx={{ width: "90%", margin: "0 auto" }} container spacing={1}>
+        <Grid sx={{ width: "90%", margin: "0 auto" }} container>
           <Grid item xs={6}>
             {/* ID  */}
             <Item>
@@ -74,16 +88,15 @@ function Add() {
                 noValidate
                 autoComplete="off">
                 <TextField
-                  id="outlined-basic"
                   label="ID"
                   variant="outlined"
-                  value={id}
-                  onChange={onIdChange}
+                  value={repos.id}
+                  onChange={handleChange}
                 />
               </Box>
             </Item>
           </Grid>
-          <Grid item xs={6} spacing={1}>
+          <Grid item xs={6}>
             {/* Name  */}
             <Item>
               <Box
@@ -92,11 +105,13 @@ function Add() {
                   "& > :not(style)": { m: 1, width: "100%" },
                 }}
                 noValidate
-                autoComplete="off">
+                autoComplete="on">
                 <TextField
-                  id="outlined-basic"
+                  id="name"
                   label="Name"
                   variant="outlined"
+                  value={repos.userRepos}
+                  onChange={handleChange}
                 />
               </Box>
             </Item>
@@ -104,7 +119,7 @@ function Add() {
         </Grid>
         {/* end-group  */}
         {/* group  */}
-        <Grid sx={{ width: "90%", margin: "0 auto" }} container spacing={1}>
+        <Grid sx={{ width: "90%", margin: "0 auto" }} container>
           <Grid item xs={12}>
             {/* Desciption  */}
             <Item>
@@ -116,10 +131,12 @@ function Add() {
                 noValidate
                 autoComplete="off">
                 <TextField
-                  id="outlined-textarea"
+                  id="description"
                   label="Desciption"
                   placeholder="Enter Desciption"
                   multiline
+                  value={repos.description}
+                  onChange={handleChange}
                 />
               </Box>
             </Item>
@@ -127,7 +144,7 @@ function Add() {
         </Grid>
         {/* end-group  */}
         {/* group  */}
-        <Grid sx={{ width: "90%", margin: "0 auto" }} container spacing={1}>
+        <Grid sx={{ width: "90%", margin: "0 auto" }} container>
           <Grid item xs={6}>
             {/* Watchers Count  */}
             <Item>
@@ -139,14 +156,17 @@ function Add() {
                 noValidate
                 autoComplete="off">
                 <TextField
-                  id="outlined-basic"
+                  id="watcher"
                   label="Watchers Count"
                   variant="outlined"
+                  type="number"
+                  value={repos.watcher}
+                  onChange={handleChange}
                 />
               </Box>
             </Item>
           </Grid>
-          <Grid item xs={6} spacing={1}>
+          <Grid item xs={6}>
             {/* Language  */}
             <Item>
               <Box
@@ -157,9 +177,11 @@ function Add() {
                 noValidate
                 autoComplete="off">
                 <TextField
-                  id="outlined-basic"
+                  id="language"
                   label="Language"
                   variant="outlined"
+                  value={repos.language}
+                  onChange={handleChange}
                 />
               </Box>
             </Item>
@@ -167,7 +189,7 @@ function Add() {
         </Grid>
         {/* end-group  */}
         {/* group  */}
-        <Grid sx={{ width: "90%", margin: "0 auto" }} container spacing={1}>
+        <Grid sx={{ width: "90%", margin: "0 auto" }} container>
           <Grid item xs={6}>
             {/* Open Issues  */}
             <Item>
@@ -179,14 +201,17 @@ function Add() {
                 noValidate
                 autoComplete="off">
                 <TextField
-                  id="outlined-basic"
+                  id="issues"
                   label="Open Issues"
                   variant="outlined"
+                  type="number"
+                  value={repos.openIssue}
+                  onChange={handleChange}
                 />
               </Box>
             </Item>
           </Grid>
-          <Grid item xs={6} spacing={1}>
+          <Grid item xs={6}>
             {/* Private  */}
             <Item>
               <Box
@@ -200,12 +225,12 @@ function Add() {
                   <InputLabel id="demo-simple-select-label">Private</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={age}
-                    label="Age"
+                    id="private"
+                    value={repos.private}
+                    label="private"
                     onChange={handleChange}>
-                    <MenuItem value={10}>True</MenuItem>
-                    <MenuItem value={20}>False</MenuItem>
+                    <MenuItem value={"true"}>True</MenuItem>
+                    <MenuItem value={"false"}>False</MenuItem>
                   </Select>
                 </FormControl>
               </Box>
