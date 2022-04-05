@@ -3,12 +3,12 @@
 const url = "https://api.github.com/users/defunkt/repos";
 
 const initialState = {
-  items: [],
+  reposs: [],
 };
 export default function contactReducer(state = initialState, action) {
   switch (action.type) {
     case "FETCH_DATA":
-      return { ...state, items: action.payload };
+      return { ...state, reposs: action.payload };
     default:
       return state;
   }

@@ -54,7 +54,8 @@ function Add() {
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setRepos({ ...repos, [name]: value });
+    console.log(name, value);
+    setRepos({ ...repos, name: value });
   };
   console.log(repos);
   // handleSubmit

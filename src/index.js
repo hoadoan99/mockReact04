@@ -7,19 +7,20 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ReposProvider } from "./context/context";
 import { Auth0Provider } from "@auth0/auth0-react";
-import storeData from "./Reducers/store";
 import { Provider } from "react-redux";
-import { Data } from "./Reducers/reducer";
+import { ConfigureStore } from "@reduxjs/toolkit";
+import store from "./Redux/store";
+import { fetchData } from "./Redux/reducer";
 // 9wPb8PvBlz8nRC3NeeYGYV79kKBkSIJa
 // dev-9q9ohwzs.us.auth0.com
-storeData.dispatch(Data);
+store.dispatch(fetchData);
 ReactDOM.render(
   <React.StrictMode>
     <Auth0Provider
       domain="dev-9q9ohwzs.us.auth0.com"
       clientId="9wPb8PvBlz8nRC3NeeYGYV79kKBkSIJa"
       redirectUri={window.location.origin}>
-      <Provider storeData>
+      <Provider store={store}>
         <App />
       </Provider>
     </Auth0Provider>

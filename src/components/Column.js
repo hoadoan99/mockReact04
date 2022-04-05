@@ -13,6 +13,7 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { ReposContext } from "../context/context";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 // import AddTaskIcon from "@mui/icons-material/AddTask";
 // import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 // import ReplayIcon from "@mui/icons-material/Replay";
@@ -29,6 +30,8 @@ const style = {
   p: 2,
 };
 function Column() {
+  const data = useSelector((state) => state.data.reposs);
+
   const { isLoading, repos } = React.useContext(ReposContext);
 
   const [open, setOpen] = React.useState(false);
@@ -69,7 +72,7 @@ function Column() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {repos.map((row) => {
+              {data.map((row) => {
                 const {
                   id,
                   name,
