@@ -5,10 +5,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { ReposProvider } from "./context/context";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { Provider } from "react-redux";
-import { ConfigureStore } from "@reduxjs/toolkit";
 import store from "./Redux/store";
 import { fetchData } from "./Redux/reducer";
 // 9wPb8PvBlz8nRC3NeeYGYV79kKBkSIJa
