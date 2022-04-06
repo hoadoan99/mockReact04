@@ -1,11 +1,9 @@
 /** @format */
-
-import logo from "./logo.svg";
 import "./App.css";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import AddNew from "./components/Form/Add";
-import Edit from "./components/Form/Add";
+import Edit from "./components/Form/Edit";
 import Error from "./pages/Error";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoutes from "./pages/PrivateRoutes";
@@ -25,6 +23,9 @@ function App() {
           </Route>
           <PrivateRoutes>
             <AddNew></AddNew>
+          </PrivateRoutes>
+          <PrivateRoutes>
+            <Edit path="edit/:id"></Edit>
           </PrivateRoutes>
           <Route path="*">
             <Error></Error>

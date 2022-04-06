@@ -12,7 +12,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
-import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -26,15 +25,10 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   border: "none",
   boxShadow: "none",
-  padding: theme.spacing(1),
 }));
 
 function Add() {
   // validate
-  const {
-    register,
-    formState: { error },
-  } = useForm();
   // fields
   // const [id, setId] = useState("");
   // const [name, setName] = useState("");
@@ -52,7 +46,6 @@ function Add() {
     openIssue: 0,
     prv: "",
   });
-  const [stock, setStock] = useState([]);
   // handleChange
   const handleChange = (e) => {
     const name = e.target.name;
@@ -68,6 +61,9 @@ function Add() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch({ type: "ADD_DATA", payload: repos });
+    navigate.push("/");
+  };
+  const handleCancel = () => {
     navigate.push("/");
   };
   return (
@@ -305,7 +301,9 @@ function Add() {
           </Grid>
           <Grid item xs={2}>
             <Item style={noPadding}>
-              <Button style={btn}>Cancel</Button>
+              <Button style={btn} onClick={handleCancel}>
+                Cancel
+              </Button>
             </Item>
           </Grid>
         </Grid>
@@ -313,12 +311,15 @@ function Add() {
     </Paper>
   );
 }
+
 const btn = {
   width: "100%",
   backgroundColor: "#1976d2",
   color: "white",
 };
+
 const noPadding = {
   padding: "0",
 };
+
 export default Add;

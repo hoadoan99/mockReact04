@@ -10,14 +10,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
-import { useForm } from "react-hook-form";
-import { ReposContext } from "../context/context";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-// import AddTaskIcon from "@mui/icons-material/AddTask";
-// import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-// import ReplayIcon from "@mui/icons-material/Replay";
-// import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+// Drag
 const style = {
   position: "absolute",
   top: "50%",
@@ -30,6 +26,7 @@ const style = {
   p: 2,
 };
 function Column() {
+  const navigate = useHistory();
   const data = useSelector((state) => state.data.reposs);
 
   // const { isLoading, repos } = React.useContext(ReposContext);
@@ -42,7 +39,9 @@ function Column() {
     dispatch({ type: "DEL_DATA", payload: id });
   };
   // console.log(repos);
-
+  const hanldeEdit = (id) => {
+    navigate.push(`edit/${id}`);
+  };
   return (
     <>
       {/* Data Table */}
@@ -102,7 +101,9 @@ function Column() {
                     </TableCell>
                     <TableCell>
                       <ButtonE>
-                        <Button type="button">Edit</Button>
+                        <Button type="button" onClick={() => hanldeEdit(id)}>
+                          Edit
+                        </Button>
                       </ButtonE>
                     </TableCell>
                     <TableCell>
